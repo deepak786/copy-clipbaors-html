@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <style>
+        .copy-clipbaord {
+            background-color: white;
+            border: 2px solid black;
+            color: green;
+            padding: 5px 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 20px;
+            margin: 10px 30px;
+            cursor: pointer;
+            text-decoration:none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <p data-clipboard="text that you want to copy to clipbaord" class="copy-clipbaord">Copy to clipboard</a>
+
+    <script>
+        window.addEventListener('load', function() {
+            var copyClipboard = document.querySelector('.copy-clipbaord');
+
+            // you can set the text here as well that you want to copy
+            copyClipboard.dataset.clipboard = "New text that you want to copy to clipboard";
+
+            copyClipboard.addEventListener("click", async () => {
+                var clipBoardText = copyClipboard.dataset['clipboard'];
+
+                if (navigator && navigator.clipboard && navigator.clipboard.writeText){
+                    try{
+                        // copy text to clipbaord
+                        await navigator.clipboard.writeText(clipBoardText);
+                        console.log('Content copied to clipboard');
+
+                        // share the text
+                        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+                            // mobile device
+                            if(navigator.share){
+                                console.log("sharing the text on mobile");
+                                await navigator.share({text: clipBoardText});
+                                console.log("share successfull");
+                            }else{
+                                console.log("share will not work on mobile");
+                            }
+                        }else{
+                            // desktop
+                            // ignore sharing
+                        }
+                    }catch(e){
+                        console.log(e);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
