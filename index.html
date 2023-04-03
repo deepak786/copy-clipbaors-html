@@ -2,7 +2,7 @@
 
 <head>
     <style>
-        .copy-clipbaord {
+        .copy-clipboard {
             background-color: white;
             border: 2px solid black;
             color: green;
@@ -19,11 +19,11 @@
 </head>
 
 <body>
-    <p data-clipboard="text that you want to copy to clipbaord" class="copy-clipbaord">Copy to clipboard</a>
+    <p data-clipboard="text that you want to copy to clipboard" class="copy-clipboard">Copy to clipboard</a>
 
     <script>
         window.addEventListener('load', function() {
-            var copyClipboard = document.querySelector('.copy-clipbaord');
+            var copyClipboard = document.querySelector('.copy-clipboard');
 
             // you can set the text here as well that you want to copy
             copyClipboard.dataset.clipboard = "New text that you want to copy to clipboard";
@@ -33,7 +33,7 @@
 
                 if (navigator && navigator.clipboard && navigator.clipboard.writeText){
                     try{
-                        // copy text to clipbaord
+                        // copy text to clipboard
                         await navigator.clipboard.writeText(clipBoardText);
                         console.log('Content copied to clipboard');
 
